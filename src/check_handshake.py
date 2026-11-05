@@ -203,7 +203,7 @@ def main():
         print("[OK] 1. 本地网关 (端口 8790)：正常运行 (ACTIVE)")
     else:
         print("[FAIL] 1. 本地网关 (端口 8790)：未启动或无响应")
-        print("    -> 解决方式：双击运行 d:\\maid-coding-space\\argon_anti_bridge\\start_bridge.bat")
+        print("    -> 解决方式：运行 start_bridge.bat 或 python src/bridge_server.py")
 
     # 2. Check CDP
     cdp_ok, cdp_port, ws_url = check_cdp()
@@ -270,7 +270,7 @@ def main():
             print(f"    -> 当前在线会话列表: {tab_names}")
             print(f"    -> [安全警示]：未在项目根目录下找到 .aistudio_config.json。")
             print(f"       强烈建议主君指定专属会话标题，例如：")
-            print(f"       python d:\\maid-coding-space\\argon_anti_bridge\\check_handshake.py --bind-title \"具体会话标题\"")
+            print(f"       python src/check_handshake.py --bind-title \"具体会话标题\"")
         else:
             print("[!] 3. AI Studio 油猴脚本：暂未收到心跳 (可能未打开页面或会话未锁定)")
             print("    -> 解决方式：打开浏览器访问 https://aistudio.google.com/ 并打开对应会话。")
