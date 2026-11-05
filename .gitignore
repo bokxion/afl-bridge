@@ -1,0 +1,33 @@
+# Python & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Environment & Credentials
+.env
+*.env.*
+*.token
+*.key
+*.pem
+credentials/
+*.log
+
+# Data & Runtime cache
+data/
+capsules/
+scratch/
+temp/
+*.tmp
+
+# Operating System & IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.bak*
