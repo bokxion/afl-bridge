@@ -1,12 +1,7 @@
 @echo off
-chcp 936 >nul
-title AFL Bridge - AI Studio & Antigravity 协作中枢
+chcp 65001 >nul
+title AFL Bridge Server (8790)
 cd /d "%~dp0"
-echo =======================================================
-echo   Project Argon-Flash Link (AFL) 智能体直连协作网关
-echo   本地双向网关端口: 8790
-echo =======================================================
-echo.
-echo 正在启动 AFL Bridge 调度服务...
-python bridge_server.py
-pause
+if not exist "data" mkdir "data"
+start "" /B python bridge_server.py > data\bridge_stdout.log 2>&1
+echo [OK] AFL Bridge Server v6.1.0 started in background on port 8790.

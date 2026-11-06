@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Send Consultation Capsule from Antigravity to AI Studio (v5.3 Automated File Conduit Edition).
+Send Consultation Capsule from Antigravity to AI Studio (v6.1.0 Reactive Wakeup & Attachment Conduit Edition).
 Supports 1-to-1 session routing (--target-title), multi-file attachments (--attach / -a, glob, comma-separated),
 flexible attach modes (--attach-mode chip/inline), cross-device mobile relay (F5 auto-recovery),
 and synchronous blocking wait (--wait) that natively wakes up the calling Antigravity conversation!

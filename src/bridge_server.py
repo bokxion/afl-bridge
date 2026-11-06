@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-AFL Bridge Server v6.0.2 (Clean Core & Win32 SW_SHOWNOACTIVATE + HWND_BOTTOM Window Conduit)
+AFL Bridge Server v6.1.0 (Clean Core & Win32 SW_SHOWNOACTIVATE + HWND_BOTTOM Window Conduit)
 Port: 8790
 """
 
@@ -573,7 +573,7 @@ class WorkflowBridgeManager:
             ]
             return {
                 "status": "running",
-                "version": "6.0.2",
+                "version": "6.1.0",
                 "is_paused": self.is_paused,
                 "iteration_count": self.iteration_count,
                 "has_pending_consultation": len(active_tickets) > 0,

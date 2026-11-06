@@ -1,245 +1,231 @@
-# 🏛️ AFL Bridge 全栈搭建与疑难排障终极宝典 (v5.8.0)
+# 🏛️ AFL Bridge 全栈搭建与疑难排障终极宝典 (v6.1.0 工业级权威正本)
 
-> **版本**：v5.8.0 闭环防误判终极版  
-> **核心使命**：实现 Google AI Studio（云端统帅 Argon）与 本地 Antigravity 终端之间的 100% 全后台无感、零延迟、跨桌面隔离的双向自主协同通信。  
-> **适用环境**：Windows 11 / Chrome / Tampermonkey / Python 3.10+ / Antigravity
+> **当前版本**：v6.1.0 终极正本 (Single-Shot Physical Click & Off-Screen Deep Water Edition)  
+> **核心使命**：实现 Google AI Studio（云端统帅 Argon）与 本地 Antigravity 终端（Flash 执行官）之间的 100% 全后台无感、零延迟、跨桌面隔离的双向自主协同通信。  
+> **适用环境**：Windows 10 / Windows 11 / Google Chrome / Tampermonkey / Python 3.10+ / Antigravity
 
 ---
 
 ## 目录
 1. [系统总体物理架构拓扑](#一-系统总体物理架构拓扑)
-2. [微观尸检：五大上行排异反应与 v5.8.0 终极破局法则](#二-微观尸检五大上行排异反应与-v580-终极破局法则)
-3. [闭环点火引擎：15次×150ms 真实清空上屏保障机制](#三-闭环点火引擎15次150ms-真实清空上屏保障机制)
-4. [下行心跳与信标：全后台特权时钟与防早泄铁闸](#四-下行心跳与信标全后台特权时钟与防早泄铁闸)
-5. [核心代码基石与接口清单](#五-核心代码基石与接口清单)
-6. [跨桌面沙盒穿透与油猴部署 SOP](#六-跨桌面沙盒穿透与油猴部署-sop)
-7. [终极疑难排障矩阵 (Troubleshooting Matrix)](#七-终极疑难排障矩阵-troubleshooting-matrix)
+2. [微观物理根因与架构演进断代史](#二-微观物理根因与架构演进断代史)
+3. [单次确定性点火引擎：50ms 状态机与 250ms 防抖破局法则](#三-单次确定性点火引擎50ms-状态机与-250ms-防抖破局法则)
+4. [全后台无感通信：第二桌面展开与 -32000 离屏深水区调度](#四-全后台无感通信第二桌面展开与--32000-离屏深水区调度)
+5. [下行回传闭环：compareDocumentPosition 思考缝合与 EOF ACK 直通](#五-下行回传闭环comparedocumentposition-思考缝合与-eof-ack-直通)
+6. [核心组件与物理文件基石](#六-核心组件与物理文件基石)
+7. [跨桌面沙盒穿透与油猴部署 SOP](#七-跨桌面沙盒穿透与油猴部署-sop)
+8. [终极疑难排障与自愈矩阵 (Troubleshooting Matrix)](#八-终极疑难排障与自愈矩阵-troubleshooting-matrix)
 
 ---
 
 ## 一、 系统总体物理架构拓扑
 
-AFL (Argon-Flash Link) 体系采用三层三权分立的工业级拓扑设计：
+AFL (Argon-Flash Link) 体系采用三层三权分立的工业级拓扑设计，旨在彻底终结人工复制粘贴、手动拖拽与盲目掐表等待，实现云端高维统帅与本地工程执行官之间的无缝协同：
 
 ```
 +--------------------------------------------------------------------------+
-|                        云端统帅 (Google AI Studio)                       |
-|               https://aistudio.google.com/prompts/[专属会话]              |
+|                  云端统帅中枢 (Google AI Studio)                          |
+|             https://aistudio.google.com/prompts/[专属星宿会话]            |
 |                                                                          |
 |   +------------------------------------------------------------------+   |
-|   |         油猴常驻脚本 (argon_commander.user.js v5.8.0)            |   |
-|   |  - 扩展特权脉冲 (GM_xmlhttpRequest) 击穿 Chromium 后台深度节流   |   |
-|   |  - 纯内存 DOM 探针 (零重排 textContent，绝不调用 innerText)      |   |
-|   |  - 底部输入框精准寻址 (排除顶部 System Prompt 与标题栏)          |   |
-|   |  - 双擎填字 (Chromium execCommand + 跨沙盒安全 Setter)           |   |
-|   |  - 绝缘 Run 按键寻址 (禁扫全页 Button，杜绝 Add stop sequence)   |   |
-|   |  - 15次×150ms 闭环连击 (以输入框清空上屏为唯一自停判据)         |   |
-|   |  - 单调递增回合守卫 + 行尾绝对锚定 EOF ACK 拦截器               |   |
+|   |          油猴常驻脚本 (argon_commander.user.js v6.1.0)           |   |
+|   |  - GM_xmlhttpRequest 特权脉冲：击穿 Chromium 后台深度挂起与节流   |   |
+|   |  - 纯内存 DOM 探针：零重排 textContent，杜绝页面卡顿与失焦        |   |
+|   |  - 50ms 状态机精准防吞点火：单次原子物理点击，杜绝连续盲发重发   |   |
+|   |  - 思考全量缝合：compareDocumentPosition 跨块拓扑排序，杜绝丢字  |   |
+|   |  - 终极闭环信标：<!-- [AFL_EOF_ACK] --> 绝对行尾拦截与极速回传    |   |
 |   +------------------------------------------------------------------+   |
 +-----------------------------------^--|-----------------------------------+
                                     |  | (HTTP Keep-Alive 脉冲 / ACK / Dispatch)
                                     |  v
 +--------------------------------------------------------------------------+
-|                        本地守护中继 (Bridge Server)                       |
-|                 http://127.0.0.1:8790 (bridge_server.py)                 |
+|                      本地守护中继 (Bridge Server)                         |
+|                 http://127.0.0.1:8790 (src/bridge_server.py)             |
 |                                                                          |
-|   - 维护独占 Ticket 插槽 (Pending -> Dispatched -> Captured)             |
-|   - 原生长轮询阻塞队列 (挂起等待直到 AI 回传或超时)                     |
-|   - 附件与工程文件 Base64 自动分发与暂存                                 |
+|   - 独占 Ticket 插槽管理 (Pending -> Dispatched -> Captured)             |
+|   - 网关微秒级原子取件锁 (单标签页命中立即锁定，彻底杜绝并发抢单)       |
+|   - 原生长轮询阻塞队列 (挂起等待直到 AI 回传或超时，零轮询空耗)          |
+|   - 1-to-1 多会话单播定向路由与心跳拓扑校验 (--target-title)             |
+|   - 附件与超长工程源码纯内存 Markdown 内联自动流转                       |
 +-----------------------------------^--|-----------------------------------+
-                                    |  |
-                                    |  v (Subprocess 长轮询 / Exit 0 唤醒)
+                                    |  | (原生 Reactive Wakeup 阻塞发件与结果捕获)
+                                    |  v
 +--------------------------------------------------------------------------+
-|                     本地执行端 (Antigravity Terminal)                     |
+|                   本地终端案前特遣 (Antigravity IDE / DSH)               |
 |                                                                          |
-|   - 发令脚本：send_to_argon.py --file <胶囊路径> --wait                  |
-|   - 握手巡检：check_handshake.py (网关/CDP/油猴三位一体核验)             |
-|   - 响应式苏醒：Reactive Wakeup 自我唤醒 (<=2500 stdout, >2500 落盘)     |
-|   - 穿透安装：open_userscript_install.py (Win32 API 跨桌面置顶)           |
+|   - send_to_argon.py --wait 阻塞挂起与唤醒                               |
+|   - 双模输出闭环 (<=2500 字符 stdout 直出，>2500 字符落盘秒读)           |
+|   - background_window.py 离屏深水区调度 (-32000, -32000) 与防休眠启航   |
+|   - Flash 3.8 High 案前实操：原子级改码、编译校验与高信噪比战报呈回       |
 +--------------------------------------------------------------------------+
 ```
 
 ---
 
-## 二、 微观尸检：五大上行排异反应与 v5.8.0 终极破局法则
+## 二、 微观物理根因与架构演进断代史
 
-在探索浏览器全后台最小化（`SW_MINIMIZE`）无感发信与极端界面状态的过程中，隔壁净室项目与 AFL 系统的实机大考共同揭开了五大隐秘病灶的物理成因：
+从早期脚本到 v6.1.0 权威正本的演进过程中，AFL 体系历经了五大关键物理病灶的勘查与彻底根治：
 
-### 1. 排异一：顶部系统提示词框误寻址（幽灵发信）
+### 1. 顶部系统提示词框误寻址（幽灵发信）
+* **物理成因**：为支持全后台运行而移除 `offsetParent !== null` 可见性过滤后，`document.querySelector('ms-autosize-textarea textarea')` 误抓了排在 DOM 首部折叠隐藏的 `ms-system-instructions`（系统指令框）。
+* **致命现象**：咨询胶囊被填入顶部系统指令栏，底部真实聊天框空空如也，Run 键无反应。
+* **终极破局**：严格限定底部包装器 `ms-prompt-input-wrapper textarea`；显式排除祖先容器包含 `ms-system-instructions`、`ms-prompt-header`、`header`、`ms-prompt-title` 的元素。
 
-* **物理成因**：为了支持最小化移除了 `offsetParent !== null`，导致 `document.querySelector('ms-autosize-textarea textarea')` 失去了可见性过滤，精准抓中了排在 DOM 首部折叠隐藏的 `ms-system-instructions`（系统指令框）。
-* **致命现象**：咨询胶囊被填入顶部系统提示词栏，底部真实聊天框空空如也，Run 键无反应，手机端刷新不见任何新消息。
-* **破局法则**：
-  - 祖先容器阻断：严禁命中包含 `ms-system-instructions`、`ms-prompt-header`、`header`、`ms-prompt-title` 的元素；
-  - 语义属性过滤：排除 `aria-label` / `placeholder` 包含 `system`、`instruction`、`title` 的输入框；
-  - 优先锁定底部包装器 `ms-prompt-input-wrapper textarea`，回退时取 DOM 序末位聊天框。
+### 2. 跨沙盒原生 Setter 裸奔抛错（Illegal invocation）
+* **物理成因**：在 Tampermonkey 双沙盒下直接调用原型赋值器 `prototypeValueSetter.call(element, value)`，因 Receiver 与 Prototype 跨越沙盒上下文失配而抛出类型错误。
+* **终极破局**：构建 `candidateProtos` 级联多层原型回退遍历（`Object.getPrototypeOf` -> `pageWindow` -> `window`），辅以全域 `try...catch` 与 Chromium 原生 `execCommand('insertText')`。
 
-### 2. 排异二：跨沙盒 原生 Setter 裸奔抛 `TypeError: Illegal invocation`
+### 3. 右侧设置栏误判与永恒生成状态（Add stop sequence 陷阱）
+* **物理成因**：AI Studio 右侧高级参数栏展开后常驻一个按钮名为 **"Add stop sequence"**。旧脚本扫描全页 `button` 且包含 `stop` 字符串，导致误以为页面永远在生成中，发件逻辑自我短路。
+* **终极破局**：绝缘按键寻址，严格锁定右下角 `ms-run-button button.run-button`；停止态识别唯认类名 `.stoppable` 或显式属性 `aria-label === 'stop'`。
 
-* **物理成因**：在 `@grant unsafeWindow` 双沙盒下直接调用原型赋值器 `prototypeValueSetter.call(element, value)`，因 Receiver 与 Prototype 跨越沙盒上下文失配而抛出类型错误，且外层缺少 `try...catch` 保护。
-* **致命现象**：JavaScript 执行流瞬间崩溃，紧随其后的 `triggerRun()` 根本来不及执行。
-* **破局法则**：
-  - 构建 `candidateProtos` 级联多层原型回退遍历（`Object.getPrototypeOf` -> `pageWindow` -> `window`）；
-  - 全域 `try...catch` 包裹，绝不让跨界异常穿透；
-  - 辅以 Chromium C++ 级 `execCommand('insertText')` 原生触发表单校验。
-
-### 3. 排异三：0ms 同步点击遭 Angular `runBtn.disabled` 锁阻断
-
-* **物理成因**：填入文本同一毫秒内，Angular Zone.js 微任务表单校验尚未执行完毕，`runBtn.disabled` 依然保持 `true`。旧代码 `if (!isDisabled) runBtn.click();` 恒定被跳过。
-* **致命现象**：HUD 抢跑显示 `THINKING`，但实际物理点击被 `disabled` 属性死死挡住，未向后端发出网络请求。
-* **破局法则**：
-  - 撬锁瞬发：0ms 点击前强行剥离 `runBtn.disabled = false` 与 `mat-mdc-button-disabled` 样式；
-  - 配合 15次×150ms 闭环补点，确保 Zone.js 消化微任务后完成彻底击发。
-
-### 4. 排异四：全页面扫描 Button 误中右侧设置栏 `Add stop sequence` 陷阱（v5.8.0 关键突破）
-
+### 4. 盲目重投与连续扫射导致的“双发撕裂”（v6.0 关键尸检突破）
 * **物理成因**：
-  - 在 Google AI Studio 右侧的高级参数栏（Run Settings）中，展开后常驻一个按钮名为 **"Add stop sequence"**（添加停止序列）；
-  - 旧版 `findRunButton` 与 `isRunButtonInStopState` 使用 `document.querySelectorAll('button')` 并在全页范围匹配 `text.includes('stop')`；
-  - 一旦用户或页面展开了右侧参数栏，该全页面扫描立刻抓中 `Add stop sequence` 按钮！
-* **双重短路灾难**：
-  - `checkAiStudioGenerating()` 判定存在包含 `stop` 的按钮，导致其 **24 小时恒定返回 `true`（误以为永远在生成）**；
-  - `triggerRun()` 在第 1 行执行 `if (checkAiStudioGenerating()) return;`，直接被自我短路拦截，填完文字后拒绝点击发送！
-  - `pollForConsultations()` 轮询接单逻辑同样因为检测到“正在生成”而拒绝接收 Antigravity 派发的新胶囊！
-* **破局法则**：
-  - **绝缘 Run 按键寻址**：严禁使用 `querySelectorAll('button')` 扫描全页面普通按钮！严格锁定右下角 `ms-run-button button`：
-    ```javascript
-    function findRunButton() {
-        return document.querySelector(
-            "ms-run-button button.run-button, ms-run-button button[type='submit'], ms-run-button button, button.run-button"
-        );
-    }
-    ```
-  - **精准停止态识别**：唯认 AI Studio 原生类名 `.stoppable` 或明确的 `aria-label === 'stop'`，严禁使用盲目的 `textContent.includes('stop')`。
+  - 旧版架构采用“15次×150ms 闭环连击”或“300ms else triggerRun”，试图解决按钮 disabled 问题；
+  - 但大文本注入后，Angular Zone.js 微任务与 Tokenizer 词元计数耗时 400ms~800ms，300ms 盲目超时掐表必然导致误判进入 else 触发第二次点火；
+  - 加上网关未在 Poll 时原子上锁，导致同一任务被重复下发、同一提示词在前端被点击两次，引发生成流被打断并在正文中穿插分裂出多个思考条（Thinking Bar）。
+* **终极破局**：
+  - 网关轮询首次命中微秒级加锁 `ready_for_aistudio = False`；
+  - 彻底拔除连续扫射与 300ms 盲发，升级为 **50ms 状态机精准防吞点火与单次确定性原子物理点击 (Single-Shot Physical Click & 250ms Anti-Debounce)**。
 
-### 5. 排异五：隐藏子节点文字污染（v5.8.0 关键突破）
+### 5. Windows 最小化（SW_MINIMIZE）导致的渲染与事件冻结
+* **物理成因**：Windows DWM 在窗口最小化时会立即停止 GPU 视口绘制并剥离渲染表面，Chromium 内核触发 `kFrozen` 生命周期挂起，导致 JavaScript 定时器与 Angular 脏检查彻底停摆。
+* **终极破局**：废黜窗口最小化，确立 **“第二虚拟桌面常驻展开”** 与 **“background_window.py 坐标离屏深水区 (-32000, -32000)”** 双重无感调度方案。
 
-* **物理成因**：
-  - 即使仅扫描 `ms-run-button button`，由于使用了 `textContent`，按钮内部未激活的隐藏子图标名字（例如 `<mat-icon>stop_circle</mat-icon>`）也会被读入文本中；
-  - 若代码直接判断 `btn.textContent.includes('stop')`，在正常等待状态下也会被误判为停止状态。
-* **破局法则**：
+---
+
+## 三、 单次确定性点火引擎：50ms 状态机与 250ms 防抖破局法则
+
+在 v6.1.0 中，输入注入与点火流程由一套高度精密的原子状态机驱动：
+
+```
+[ 网关分配 Ticket ]
+       │
+       ▼ (特权 IPC 脉冲拉取)
+[ 文本双擎注入 (execCommand + Safe Setter) ]
+       │
+       ▼
+[ 状态机每 50ms 轮询侦测 (最多持续 1200ms) ]
+       │
+   ┌───┴────────────────────────┐
+   ▼                            ▼
+[ 检测到 disabled 属性剥离 ]   [ 超时 300ms 仍未解锁 ]
+   │                            │
+   │                            ▼ (DOM API 强制强行剥离 disabled)
+   └───────────┬────────────────┘
+               ▼
+   [ 微秒级执行单次物理原子点击 dispatchPhysicalClick ]
+               │
+               ▼
+   [ 立即将点火状态机锁定为 FIRE_DONE，开启 250ms 防抖 ]
+               │
+               ▼
+   [ 彻底杜绝二次盲发，平稳步入流式生成监听 ]
+```
+
+关键实现原则：
+1. **单次敲击收敛**：每一次任务投递，在生命周期内**有且仅有一次物理点击事件**；
+2. **Tokenizer 状态对齐**：监听前端框架真实解析状态，在其就绪微秒瞬间击发；
+3. **网关原子排重**：网关在遍历候选列表时，匹配中立即标记消费状态，阻断任何多标签页并发竞争。
+
+---
+
+## 四、 全后台无感通信：第二桌面展开与 -32000 离屏深水区调度
+
+为了实现“既不打扰主君当前桌面操作，又绝不让 Chrome 触发内核休眠冻结”的极致体验，v6.1.0 提供两种经过严苛验证的窗口调度方案：
+
+### 方案 A：Windows 第二虚拟桌面常驻法（推荐日常伴读）
+1. 在 Windows 11 中按下 `Win + Tab`，新建一个“桌面 2”；
+2. 将用于协同的 Chrome 浏览器窗口拖至“桌面 2”并保持正常窗口大小展开（切勿点击最小化）；
+3. 主君在“桌面 1”进行正常的编码与办公，底层 DWM 维持两个桌面的完整渲染管线，AFL 在后台畅通无阻。
+
+### 方案 B：坐标离屏深水区调度法（`src/background_window.py`）
+借助 `src/background_window.py` 提供的 Win32 调度器，将专用窗口在展开状态下平移至虚拟显示坐标之外：
+```powershell
+# 1. 探查当前 Chrome 窗口状态
+python src/background_window.py --status
+
+# 2. 将目标专席窗口沉入深水区 (-32000, -32000)
+python src/background_window.py --offscreen --target-title "统帅"
+
+# 3. 需要时随时唤回至主屏幕可见区域 (100, 100)
+python src/background_window.py --restore --target-title "统帅"
+```
+* **防串扰红线保护**：若检测到当前窗口包含主君正在浏览的其他标签页（如包含远程桌面、多标签页），脚本严格拒绝搬移，避免干扰主君日常工作。
+
+---
+
+## 五、 下行回传闭环：compareDocumentPosition 思考缝合与 EOF ACK 直通
+
+针对 Gemini 4 等具有交织思考（Interleaved Thinking）特性的模型，v6.1.0 在回传端构筑了两道钢规：
+
+### 1. `compareDocumentPosition` 跨块 DOM 全量缝合
+* 大模型单轮回复经常被拆分成思考块（`ms-thought-chunk`）、正文块（`ms-text-chunk`）、代码块（`ms-code-chunk`）交错渲染；
+* 脚本采用原生 DOM 树拓扑位置算法，精确比对位于当前轮次最新 User Prompt 之后的所有有效 Model 块；
+* 剥离思考容器与错误容器，按文档流物理先后顺序将正文全量缝合拼接，杜绝任何断章、丢字或只取末尾块的事故。
+
+### 2. 行尾绝对锚定信标直通车 (`[AFL_EOF_ACK]`)
+* 正则表达式严格锚定行尾：
   ```javascript
-  function isRunButtonInStopState(btn) {
-      const runBtn = btn || findRunButton();
-      if (!runBtn || runBtn.disabled) return false;
-      // 唯认 AI Studio 生成态专属类名 stoppable 或明确的 aria-label
-      if (runBtn.classList.contains('stoppable')) return true;
-      const aria = (runBtn.getAttribute('aria-label') || '').trim().toLowerCase();
-      if (aria === 'stop' || aria.startsWith('stop ') || aria.includes('停止')) return true;
-      return false;
-  }
+  const EOF_TAIL_REGEX = new RegExp('\\[AFL_EOF_' + 'ACK\\]\\s*(?:-->)?\\s*`{0,3}\\s*$');
   ```
+* 唯有当信标出现在全篇回复的绝对末尾时，立即短路跳过 2.2 秒静默倒计时，毫秒级回传网关；
+* 正文中若有对信标的代码引用或讨论，因未处于末行而被安全放行；回传前自动剥离信标，确保归档文本绝对纯净。
 
 ---
 
-## 三、 闭环点火引擎：15次×150ms 真实清空上屏保障机制
+## 六、 核心组件与物理文件基石
 
-在 v5.8.0 中，`triggerRun` 彻底拔除了 `checkAiStudioGenerating()` 的前置短路，改为闭环递归验证引擎：
-
-```javascript
-function triggerRun(textarea, attempt = 0) {
-    if (!isBridgeActive || !isCommanderTab() || attempt > 15) return false;
-    try { pumpMainWorldVirtualFrames(); } catch (e) {}
-
-    const activeArea = textarea || findInputTextarea();
-    const currentInputVal = activeArea ? (activeArea.value || activeArea.textContent || '').trim() : '';
-    const runBtn = findRunButton();
-
-    // 唯一停止重试判据：当 attempt > 0 时，输入框已被清空上屏，或者 Run 按钮已挂上 stoppable 类名进入停止态
-    if (attempt > 0 && (currentInputVal.length === 0 || isRunButtonInStopState(runBtn))) {
-        generationPhase = 'PHASE1_GENERATING';
-        isGenerating = true;
-        quietCountdownStart = 0;
-        updateHUDStatus();
-        return true;
-    }
-
-    // 若文字仍在框内，再次派发 input 事件唤醒 Angular 按钮解禁
-    if (attempt >= 1 && activeArea) {
-        try {
-            const Evt = pageWindow.Event || window.Event;
-            activeArea.dispatchEvent(new Evt('input', { bubbles: true, composed: true }));
-            pumpMainWorldVirtualFrames();
-        } catch (e) {}
-    }
-
-    if (runBtn && !isRunButtonInStopState(runBtn)) {
-        try {
-            // 强行摘除 disabled 锁并触发完整鼠标点击事件链 (mousedown -> mouseup -> click)
-            runBtn.disabled = false;
-            runBtn.removeAttribute('disabled');
-            runBtn.removeAttribute('aria-disabled');
-            runBtn.classList.remove('mat-mdc-button-disabled');
-            const MEvent = pageWindow.MouseEvent || window.MouseEvent;
-            runBtn.dispatchEvent(new MEvent('mousedown', { bubbles: true, cancelable: true }));
-            runBtn.dispatchEvent(new MEvent('mouseup', { bubbles: true, cancelable: true }));
-            lastAttemptTimestamp = Date.now();
-            runBtn.click();
-        } catch (e) {}
-    }
-
-    // 双重保险：从第 1 次补点起，同步向输入框派发 Ctrl+Enter 快捷键
-    if (attempt >= 1 && activeArea) {
-        try {
-            activeArea.focus();
-            const KEvent = pageWindow.KeyboardEvent || window.KeyboardEvent;
-            activeArea.dispatchEvent(new KEvent('keydown', {
-                key: 'Enter', code: 'Enter', keyCode: 13, which: 13, ctrlKey: true, bubbles: true, cancelable: true
-            }));
-        } catch (e) {}
-    }
-
-    try { pumpMainWorldVirtualFrames(); } catch (e) {}
-    setTimeout(() => triggerRun(activeArea, attempt + 1), 150);
-    return true;
-}
+```
+afl-bridge/
+├── README.md                           # 顶层架构与极速上手指南 (v6.1.0)
+├── sync_from_live.py                   # 宿主工作区与 Git 仓库双向同步工具
+├── docs/                               # 深度技术文档
+│   ├── AFL_Bridge_全栈搭建与疑难排障终极宝典.md # 本宝典正本 (v6.1.0)
+│   └── capsule_netroom_dedup_autopsy.md         # 双发与思考条分裂微观尸检报告
+├── src/                                # 核心运行时组件
+│   ├── bridge_server.py                # 本地 8790 端口中继守护网关
+│   ├── send_to_argon.py                # 阻塞投递与长轮询挂起脚本
+│   ├── check_handshake.py              # 全链路三方握手与便携会话绑定
+│   ├── open_userscript_install.py      # Win32 沙盒穿透油猴安装器
+│   ├── background_window.py            # 深水离屏 (-32000) 窗口调度器
+│   ├── argon_commander.user.js         # v6.1.0 生产级油猴中继脚本
+│   ├── start_bridge.bat                # 网关一键脱壳启动批处理
+│   └── launch_afl_chrome.bat           # Chrome 防休眠专用参数启动器
+└── skills/                             # Antigravity 智能体专属法典
+    ├── aistudio/                       # AFL 自动化发件与双端协同权威技能大正本
+    ├── argon-flash-commander/          # Argon 统帅 vs Flash 执行官双层节流规范
+    └── tampermonkey-installer/         # 油猴脚本跨桌面沙盒穿透安装标准技能
 ```
 
 ---
 
-## 四、 下行心跳与信标：全后台特权时钟与防早泄铁闸
+## 七、 跨桌面沙盒穿透与油猴部署 SOP
 
-1. **特权扩展脉冲引擎 (GM_xmlhttpRequest Clock)**：油猴扩展后台进程不受标签页后台深度降频限制，维持永不降频的高精度时钟。
-2. **回合单调递增守卫 (Turn-Count Monotonic Guard)**：记录基线模型回合数量 `AFL_BASELINE_MODEL_COUNT`，模型回答块数量必须达到 `baseline + 1` 方可捕获。
-3. **行尾绝对锚定正则 (`AFL_EOF_ACK_REGEX`)**：
-   ```javascript
-   const AFL_EOF_ACK_REGEX = new RegExp('\\[' + 'AFL_EOF_' + 'ACK\\]\\s*(?:-->)?\\s*$');
-   ```
-   杜绝正文中引述信标引发的提早截断回传。
+当新电脑初次部署或油猴脚本升级至 v6.1.0 时，智能体**严禁使用任何 `Start-Process` 或普通系统关联调用**，必须执行专用 Win32 穿透器：
 
----
-
-## 五、 核心代码基石与接口清单
-
-* 本地网关：`http://127.0.0.1:8790` (`bridge_server.py`)
-* 发信与等待：`python d:\maid-coding-space\argon_anti_bridge\send_to_argon.py --file <胶囊> --wait`
-* 握手巡检：`python d:\maid-coding-space\argon_anti_bridge\check_handshake.py`
-* 穿透安装：`python d:\maid-coding-space\argon_anti_bridge\open_userscript_install.py`
-
----
-
-## 六、 跨桌面沙盒穿透与油猴部署 SOP
-
-运行命令：
-```bash
-python d:\maid-coding-space\argon_anti_bridge\open_userscript_install.py
+```powershell
+python src/open_userscript_install.py
 ```
-通过 Win32 API 切换 `WinSta0\Default` 桌面，调用 `keybd_event(VK_MENU)` + `AttachThreadInput` 击穿 Windows 前台焦点锁，置顶唤起 Chrome 访问 `http://127.0.0.1:8790/argon_commander.user.js`，点击页面中央绿色【Install / Update】按键即可秒级完成部署。
+
+### 底层穿透四部曲：
+1. `OpenDesktopW("Default")` + `SetThreadDesktop`：将执行线程切入用户交互桌面；
+2. `STARTUPINFO.lpDesktop = "WinSta0\\Default"`：强制在主屏幕生成 Chrome 进程；
+3. `keybd_event(VK_MENU, ...)` + `AttachThreadInput`：击穿 Windows 前台焦点锁；
+4. `ShowWindow(SW_RESTORE)` + `SetForegroundWindow`：将 Chrome 窗口置顶呈现。
+
+主君移步至弹出的 Chrome 页面，轻点中央绿色的 **Install** 或 **Update** 按键，刷新 AI Studio 页面，即可见右下角亮起翠绿色的 `⚡ AFL v6.1.0 智能路由` 浮窗。
 
 ---
 
-## 七、 终极疑难排障矩阵 (Troubleshooting Matrix)
+## 八、 终极疑难排障与自愈矩阵 (Troubleshooting Matrix)
 
-| 故障现象 | 微观物理根因 | 终极破局对策 |
+| 异常现象 | 物理根因分析 | 唯一权威对策 |
 | :--- | :--- | :--- |
-| **右侧设置栏展开后脚本彻底瘫痪** | 误把右侧参数栏 `Add stop sequence` 当成 Stop 按钮 | 升级 v5.8.0，只锁定 `ms-run-button button`，认准 `.stoppable` |
-| **填完文字后拒绝点击发送** | `checkAiStudioGenerating` 误判为 true，短路了 `triggerRun` | 升级 v5.8.0，拔除前置短路，以“输入框清空上屏”为唯一判据 |
-| **手机上看未发出，聊天框空白** | `findInputTextarea` 命中顶部折叠的系统提示词框 | 升级 v5.7.0+，使用包含祖先排除与末位过滤的精准寻址 |
-| **控制台报错 `Illegal invocation`** | `@grant unsafeWindow` 跨沙盒原型 Setter Receiver 失配 | `candidateProtos` 级联回退遍历，全 try-catch 包裹 |
-| **0ms 点击失效，显示 THINKING 却未发** | Angular Zone.js 未消化微任务，`runBtn.disabled` 挡回点击 | 强行剥离 disabled 属性，15次×150ms 闭环连击 |
-| **引述信标导致回复被截断早泄** | 使用了模糊 `includes('[AFL_EOF_ACK]')` 匹配 | 采用严格行尾锚定正则 `AFL_EOF_ACK_REGEX` |
-| **窗口最小化时 16 分钟无响应** | Chromium 深度降频导致 DOMTimer 冻结 | 启用基于 `GM_xmlhttpRequest` 的扩展级特权脉冲引擎 |
-| **调用安装脚本但在前台看不见窗口** | 后台会话隔离于独立 Desktop，或受焦点锁拦截 | 使用 `open_userscript_install.py` 执行 Win32 API 穿透置顶 |
-
----
-*宝典升级至 v5.8.0，扫除全域隐患，闭环大成。*
+| **8790 端口连接被拒绝 (Connection Refused)** | `bridge_server.py` 未启动或进程异常退出 | 运行 `python src/check_handshake.py`（内部会自动后台拉起），或手动运行 `src/start_bridge.bat`。 |
+| **三方巡检显示 AI Studio 标签页未找到** | Chrome 未打开 AI Studio，或页面标题与配置不匹配 | 打开 AI Studio 页面；核验左上角会话标题与 `.aistudio_config.json` 中的 `target_title` 是否一致。 |
+| **发送时文字被填入顶部系统提示词栏** | DOM 选择器抓中折叠的 `ms-system-instructions` | 确保使用的是 v6.1.0 脚本，已部署祖先容器过滤与底部包装器强约束。 |
+| **同一条消息被发送两次，思考条在正文中穿插** | 旧版脚本 15x150ms 连击或 300ms 盲发触发二次点击 | 升级至 v6.1.0 脚本，已收敛为 50ms 状态机单次物理原子点击并配合网关原子锁。 |
+| **长篇回复或文学正文前半部分被截断** | 模型交织思考分裂多 DOM 容器，旧提取器误抓末尾块 | v6.1.0 已集成 `compareDocumentPosition` 穿透算法，全量缝合最新 User 后的全部正文。 |
+| **后台运行一段时间后不再接收新任务** | Chrome 窗口被最小化，DWM 剥离渲染导致内核休眠 | 坚决禁止最小化；使用第二虚拟桌面常驻展开，或运行 `python src/background_window.py --offscreen`。 |
+| **发信命令瞬间退出且未等待回复** | 误加了 `--no-wait` 参数跳过了长轮询 | 必须使用 `python src/send_to_argon.py --file <胶囊> --wait` 发起长轮询阻塞等待。 |

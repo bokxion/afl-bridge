@@ -30,7 +30,6 @@ DOCS = [
 
 SKILLS = [
     "aistudio",
-    "argon-collab-bridge",
     "argon-flash-commander",
     "tampermonkey-installer",
 ]

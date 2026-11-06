@@ -205,13 +205,12 @@ def main():
         print("[FAIL] 1. 本地网关 (端口 8790)：未启动或无响应")
         print("    -> 解决方式：运行 start_bridge.bat 或 python src/bridge_server.py")
 
-    # 2. Check CDP
+    # 2. Check CDP (Deprecated / Informational)
     cdp_ok, cdp_port, ws_url = check_cdp()
     if cdp_ok:
-        print(f"[OK] 2. Antigravity CDP 调试信道：已就绪 (端口: {cdp_port})")
+        print(f"[*] 2. Antigravity CDP 调试信道：已侦测到端口 (端口: {cdp_port})")
     else:
-        print("[FAIL] 2. Antigravity CDP 调试信道：未侦测到监听端口")
-        print("    -> 解决方式：请确认 Antigravity 桌面端处于运行状态")
+        print("[*] 2. Antigravity CDP 调试信道：已废黜 (AFL v6.1+ 全面采用原生 Reactive Wakeup 响应式唤醒)")
 
     # 4. Check Chrome Anti-Occlusion & CDP 42068
     cdp_42068_ok, occlusion_ok, flags_list = check_chrome_anti_occlusion()
@@ -248,7 +247,7 @@ def main():
 
         if matching_tab:
             tm_ok = True
-            tab_ver = matching_tab.get('version') or '未知 (尚未刷新为 v5.9.2)'
+            tab_ver = matching_tab.get('version') or '未知'
             tab_phase = matching_tab.get('phase') or '未知'
             print(f"[OK] 3. AI Studio 油猴脚本：握手在线 (版本: {tab_ver}, 阶段: {tab_phase})")
             print(f"    -> 成功锁定专属统帅会话：[{matching_tab.get('title')}]")
@@ -276,13 +275,13 @@ def main():
             print("    -> 解决方式：打开浏览器访问 https://aistudio.google.com/ 并打开对应会话。")
 
     print("\n-------------------------------------------------------")
-    overall_ready = server_ok and cdp_ok and tm_ok
+    overall_ready = server_ok and tm_ok
     if overall_ready:
         if target_title:
             print(f"【巡检结论】：协作链路 100% 畅通！已精准就绪于专属会话 [{target_title}]。")
         else:
             print("【巡检结论】：链路基本畅通，但当前处于广播模式，建议绑定专属会话标题后再发起咨询。")
-    elif server_ok and cdp_ok:
+    elif server_ok:
         print("【巡检结论】：本地核心已就绪。请确认浏览器已打开对应的 AI Studio 专属会话。")
     else:
         print("【巡检结论】：链路尚未完全就绪，请按上述提示排除异常后重试。")

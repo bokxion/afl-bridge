@@ -1,90 +1,45 @@
 @echo off
-
-chcp 936 >nul
-
+chcp 65001 >nul
 title AFL Chrome - Anti-Occlusion & CDP Launcher (42068)
-
 cd /d "%~dp0"
 
-
-
 set "CHROME_EXE=C:\Program Files\Google\Chrome\Application\chrome.exe"
-
 if not exist "%CHROME_EXE%" set "CHROME_EXE=C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-
 if not exist "%CHROME_EXE%" set "CHROME_EXE=%LOCALAPPDATA%\Google\Chrome\Application\chrome.exe"
 
-
-
 if not exist "%CHROME_EXE%" (
-
-    echo [´íÎó] Î´ÄÜÔÚÄ¬ÈÏÂ·¾¶ÕÒµ½ Google Chrome ä¯ÀÀÆ÷ (chrome.exe)£¡
-
+    echo [ERROR] æœªåœ¨é»˜è®¤è·¯å¾„æ‰¾åˆ° Google Chrome å¯æ‰§è¡Œæ–‡ä»¶ (chrome.exe)ã€‚
     pause
-
     exit /b 1
-
 )
 
-
-
 set "AFL_URL=https://aistudio.google.com/"
-
 set "AFL_PORT=42068"
 
-
-
 echo =======================================================
-
-echo   AFL Chrome ¹¤Òµ¼¶¿¹ÕÚ±ÎÆô¶¯Æ÷ (Anti-Occlusion Launcher)
-
-echo   Chromium 156 ³¹µ×¹Ø±Õ´°¿ÚÕÚµ²ÐÝÃßÓëäÖÈ¾¶³½á
-
+echo   AFL Chrome æŠ—é®è”½ä¼‘çœ å¯åŠ¨å™¨ (Anti-Occlusion Launcher)
+echo   æ³¨å…¥ Chromium å†…æ ¸åº•å±‚æŠ—æŒ‚èµ·ä¸Žè°ƒè¯•å‚æ•°
 echo =======================================================
-
-echo [*] Chrome Â·¾¶ : %CHROME_EXE%
-
-echo [*] µ÷ÊÔ¶Ë¿Ú   : %AFL_PORT%
-
-echo [*] Ä¿±êÍøÖ·   : %AFL_URL%
-
+echo [*] Chrome è·¯å¾„ : %CHROME_EXE%
+echo [*] è°ƒè¯•ç«¯å£   : %AFL_PORT%
+echo [*] ç›®æ ‡ç½‘å€   : %AFL_URL%
 echo.
-
-echo [*] ÕýÔÚ×¢Èë 4 ´ó¿¹ÕÚ±ÎÓëÈ«ËÙÔË×ªÆô¶¯²ÎÊý£º
-
+echo [*] æ­£åœ¨æ³¨å…¥ 4 é¡¹æ ¸å¿ƒé˜²ä¼‘çœ å‚æ•°ï¼š
 echo     --disable-backgrounding-occluded-windows
-
 echo     --disable-renderer-backgrounding
-
 echo     --disable-background-timer-throttling
-
 echo     --disable-features=CalculateNativeWindowOcclusion
-
 echo.
-
-
 
 start "" "%CHROME_EXE%" ^
-
   --disable-backgrounding-occluded-windows ^
-
   --disable-renderer-backgrounding ^
-
   --disable-background-timer-throttling ^
-
   --disable-features=CalculateNativeWindowOcclusion,CalculateNativeWinOcclusion,IntensiveWakeUpThrottling ^
-
   --remote-debugging-port=%AFL_PORT% ^
-
   --profile-directory="Default" ^
-
   "%AFL_URL%"
 
-
-
-echo [OK] Chrome ÒÑ³É¹¦Æô¶¯£¡´°¿ÚÈ«ËÙÔË×ª£¬ÎÞ¾åÈÎºÎÕÚµ²»òµ×²ãµþ·Å¡£
-
+echo [OK] Chrome å·²æˆåŠŸä»¥åŽå°å…¨é€Ÿé˜²ä¼‘çœ æ¨¡å¼å¯åŠ¨ï¼
 ping 127.0.0.1 -n 3 >nul
-
 exit /b 0
-
