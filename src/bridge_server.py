@@ -221,6 +221,12 @@ class WorkflowBridgeManager:
             return True
         if t_target in t_tab or t_tab in t_target:
             return True
+        try:
+            variant = target_title.encode('gbk').decode('utf-8', errors='ignore').strip().lower()
+            if variant and (variant in t_tab or t_tab in variant):
+                return True
+        except Exception:
+            pass
         return False
 
     def _find_awaiting_ticket_for_tab(self, tab_title):

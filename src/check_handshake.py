@@ -239,9 +239,14 @@ def main():
     if target_title:
         # Precision matching mode
         t_target = target_title.lower()
+        t_var = ""
+        try:
+            t_var = target_title.encode("gbk").decode("utf-8", errors="ignore").lower()
+        except Exception:
+            pass
         for tab in active_tabs:
             t_tab = (tab.get("title") or "").strip().lower()
-            if t_target in t_tab or t_tab in t_target:
+            if t_target in t_tab or t_tab in t_target or (t_var and (t_var in t_tab or t_tab in t_var)):
                 matching_tab = tab
                 break
 
